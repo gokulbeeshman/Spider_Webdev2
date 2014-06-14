@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<title>
+Tic Tac Toe
+</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+alert("yo");
+</script>
+<head>
+<style>
+table
+{
+border-collapse:collapse;
+}
+table, td, th
+{
+border:1px solid black;
+}
+html { 
+  background: url(bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+</style>
+</head>
+
+<body>
+Hello
+</body>
+</html>

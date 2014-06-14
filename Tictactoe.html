@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<title>
+Tic Tac Toe
+</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+alert("yo");
+var turnno=1;
+var x,y;
+var player1,player2;
+var time=0;
+var flag=0;
+map=new Array(3);
+map[0]=new Array(3);
+map[1]=new Array(3);
+map[2]=new Array(3);
+
+
+function clear()
+{
+for(var i=0;i<3;i++)
+{
+for(var j=0;j<3;j++)
+{
+map[i][j]=0;
+}
+}
+}
+
+function timer()
+{
+
+if(document.getElementById("timecheck").checked)
+{
+	var tocheck;
+	var id3;var flag=0;
+	time+=1;
+if(time%10==0)
+{
+
+	for(var i=0;i<3;i++)
+		{
+		for(var j=0;j<3;j++)
+		{
+			if(map[i][j]==0)
+			{
+				if(turnno%2==1)
+				{
+					map[i][j]=1;
+					id3=String(i);
+					id3+=",";
+					id3+=String(j);
+					document.getElementById(id3).src="x.jpg";
+					document.getElementById(id3).class='clicked';
+					if(String(document.getElementById(id3).class)!='clicked')
+						alert("fuck");
+					flag=1;
+					turnno++;
+				}
+				else 
+				{
+					map[i][j]=2;
+					id3=String(i);
+					id3+=",";
+					id3+=String(j);
+					document.getElementById(id3).class='clicked';
+					document.getElementById(id3).src="o.jpg";
+	
+					flag=1;
+					turnno++;
+				}
+				time=0;
+				break;
+			}
+	
+		}
+			if(flag) {break;}
+	}
+}
+}
+checker(-1,-1,-1);
+setTimeout(timer,1000);
+}
+
+function checker(a,b,c)	
+{			var winner;
+if(c>0){	
+map[a][b]=c;	
+}	
+for(var i=0;i<3;i++)
+{
+if((map[i][0]==1)&&(map[i][1]==1)&&(map[i][2]==1))
+{
+flag=1;
+}
+}
+for(var i=0;i<3;i++)
+{
+if((map[0][i]==1)&&(map[1][i]==1)&&(map[2][i]==1))
+{
+flag=1;
+}
+}
+
+for(var i=0;i<3;i++)
+{
+if((map[i][0]==2)&&(map[i][1]==2)&&(map[i][2]==2))
+{
+flag=2;
+}
+}
+for(var i=0;i<3;i++)
+{
+if((map[0][i]==2)&&(map[1][i]==2)&&(map[2][i]==2))
+{
+flag=2;
+}
+}
+
+if((map[0][0]==1)&&(map[1][1]==1)&&(map[2][2]==1))
+{
+flag=1;
+}
+
+if((map[0][0]==2)&&(map[1][1]==2)&&(map[2][2]==2))
+{
+flag=2;
+}
+
+if((map[0][2]==1)&&(map[1][1]==1)&&(map[2][0]==1))
+{
+flag=1;
+}
+
+if((map[0][2]==2)&&(map[1][1]==2)&&(map[2][0]==2))
+{
+flag=2;
+}
+	
+if(flag==1)
+{
+winner=String(player1);
+winner+=" won";
+alert(winner);
+location.reload();
+}	
+if(flag==2)
+{
+winner=String(player2);
+winner+=" won";
+alert(winner);
+location.reload();
+}
+}
+$(document).ready(function(){
+clear();
+timer();
+player1=prompt("Please enter your name");
+player2=prompt("Please enter your name");
+$(".X").click(function(){
+var id=$(this).attr('class');
+var class1=$(this).attr('id');
+x=class1.substr(0,1);
+y=class1.substr(2,1);
+if(map[x][y]==0)
+{
+if((turnno%2==1)&&(id!='clicked'))
+{
+$(this).attr('src','x.jpg');
+$(this).attr('class','clicked');
+time=0;
+turnno++;
+checker(x,y,1);
+timer();
+}	
+
+else if((id!='clicked'))	
+{
+$(this).attr('src','o.jpg');
+$(this).attr('class','clicked');
+turnno++;
+time=0;
+checker(x,y,2);
+timer();
+}
+}
+});
+		
+$(".X").hover(function(){			
+var id=$(this).attr('class');
+var class1=$(this).attr('id');
+x=class1.substr(0,1);
+y=class1.substr(2,1);
+if(map[x][y]==0)
+{
+if((turnno%2==1)&&(String(id)!="clicked"))
+{	
+$(this).attr('src','x.jpg');
+}	
+
+else if(id!='clicked')
+{	
+$(this).attr('src','o.jpg');
+}
+}
+},	
+function(){
+var id=$(this).attr('class');
+if((String(id)!="clicked")&&(map[x][y]==0))
+{
+$(this).attr('src','blank.jpg');
+}
+}); 
+
+
+
+
+});
+</script>
+<head>
+<link rel="stylesheet" media="(max-width: 800px)" href="mobilestyle.css" />
+<link rel="stylesheet" media="(min-width: 800px)" href="deskstyle.css" />
+</head>
+	
+<body>
+<div id='leftie'>
+<b> SETTINGS </b> <br>
+<input type="checkbox" name="Totime" value="ToTime" id="timecheck">Time Limit?<br>
+</div>
+<div id='centre'>
+<div class="cell">
+<img src='blank.jpg' class='X' id='0,0'>
+</div>
+<div class="cell">
+<img src='blank.jpg' class='X' id='0,1'>
+</div>
+<div class="cellr">
+<img src='blank.jpg' class='X' id='0,2'>
+</div>
+<div class="cell">
+<img src='blank.jpg' class='X' id='1,0'>
+</div>
+<div class="cell">
+<img src='blank.jpg' class='X' id='1,1'>
+</div>
+<div class="cellr">
+<img src='blank.jpg' class='X' id='1,2'>
+</div>
+
+<div class="cell">
+<img src='blank.jpg' class='X' id='2,0'>
+</div>
+<div class="cell">
+<img src='blank.jpg' class='X' id='2,1'>
+</div>
+<div class="cellr">
+<img src='blank.jpg' class='X' id='2,2'>
+</div>
+
+
+
+
+</div>
+<div id='rightie'>
+<bold> Leaderboard </bold>	
+</div>
+</body>
+</html>
